@@ -1,0 +1,98 @@
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-center mt-5" *ngIf="loginsuccess">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      Giriş başarılı, yönlendiriliyorsunuz...
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="loginsuccess=false">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-5" *ngIf="loginfailed">
+   
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Giriş bilgileriniz hatalı veya eksik, lütfen doğru kullanıcı ile giriş yaptığınızdan emin olun.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="loginfailed=false">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center ">
+
+    <div class="col-4 mt-3">
+      <div class="card border-info bg-dark">
+        <img class="card-img-top" src="../../assets/img/araba2.jpg" alt="Card image cap">
+        <div class="card-header text-center text-light">
+          <h3>Giriş Yapınız</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group text-light">
+              <label for="input-email">Email Adresi</label>
+              <input type="email" class="form-control" [(ngModel)]="User.email" id="input-email"
+                aria-describedby="emailHelp" name="email">
+              <small id="emailHelp" class="form-text text-muted">Email adresiniz başka kimse ile
+                paylaşılmayacaktır.</small>
+            </div>
+            <div class="form-group text-light">
+              <label for="input-password">Şifre</label>
+              <input type="password" class="form-control" [(ngModel)]="User.password" id="input-password"
+                name="password">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="User.rememberme"
+                name="rememberme">
+              <label class="form-check-label text-light" for="exampleCheck1">Beni Hatırla</label>
+            </div>
+            <button type="button" (click)="login()" class="btn btn-info btn-lg btn-block mt-2 ">Giriş Yap</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted text-center">
+         Henüz kayıt olmadın mı. <button type="button" class="btn btn-outline-light ml-3" data-toggle="modal" data-target="#exampleModal">Hemen Kaydol</button> 
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade bg-dark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Kayıt Ol</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group text-dark">
+                <label for="signup-email">Email Adresi</label>
+                <input type="email" class="form-control"  id="signup-email"
+                  aria-describedby="emailHelp" name="email">
+                <small id="emailHelp" class="form-text text-muted">Email adresiniz başka kimse ile
+                  paylaşılmayacaktır.</small>
+              </div>
+           
+              <div class="form-group text-dark">
+                <label for="signup-password">Şifre</label>
+                <input type="password" class="form-control"  id="signup-password"
+                  aria-describedby="passwordHelp" name="password">
+              </div>  
+              
+              <button type="button" class="btn btn-info btn-lg btn-block mt-3 ">Kayıt ol</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+
+
+
+</div>
