@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Kayit } from '../models/kayit';
+import { AngularFireDatabase, } from '@angular/fire/database';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FbserviceService {
-  private dbKayit = '/Kayitlar'
+  private dbKayit ='/Posts';
+  private dbUsers = '/Kullanıcılar'
   kayitRef = null;
+  kayitUsers;
   constructor(
     public db: AngularFireDatabase,
     private fireAuth : AngularFireAuth,
   ) {
     this.kayitRef = db.list(this.dbKayit);
+    this.kayitUsers = db.list(this.dbUsers);
   }
 
   OturumAc(email,pass){
@@ -25,9 +28,20 @@ export class FbserviceService {
   KayitListele() {
     return this.kayitRef;
   }
-
-  KayitEkle(kayit) {
-    return this.kayitRef.push(kayit);
+  PostListele(){
+    
+  }
+  registerUser(user){
+    return this.fireAuth.createUserWithEmailAndPassword(user.mail, user.password);
+   }
+  createUser(user){
+    return this.kayitUsers.push(user);
+  }
+  KayitByKey(key){
+    return this.db.object("Posts/"+key)
+  }
+  KayitEkle(post : Post) {
+    return this.kayitRef.push(post);
   }
 
   KayıtDuzenle(kayit) {
@@ -37,7 +51,4 @@ export class FbserviceService {
     return this.kayitRef.remove(key)
   }
 
-  registerUser(user): void{
-    this.fireAuth.createUserWithEmailAndPassword(user.email, user.password);
-  }
 }

@@ -1,0 +1,190 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" [routerLink]="['/home']">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" [routerLink]="['/postlar']">Postlar</a>
+            <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-4 ml-5 mt-5">
+            <div class="card text-center">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active sp-danger" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                  </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Düzenle</h4>
+                    <div class="form-group ">
+                        <label style="float: left;" for="header">Başlık</label>
+                        <input type="text" class="form-control" name="header" id="header" aria-describedby="helpId"
+                            placeholder="">
+
+                    </div>
+                    <div class="form-group ">
+                        <label style="float: left;" for="description">Açıklama</label>
+                        <input type="text" class="form-control" name="description" id="description" aria-describedby="helpId"
+                            placeholder="">
+
+                    </div>
+                    <div class="form-group ">
+                        <label style="float: left;" for="header">Fotoğraf Seç</label>
+                        <input type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" class="btn btn-outline-success"
+                            autocomplete="off">
+
+                    </div>
+
+                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Kaydet</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+ 
+</div> -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/home']">Petsbook</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/home']">Anasayfa
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/postlar']">Postlarım</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/profile']">Profil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Page Content -->
+  <div class="container">
+  
+    <div class="row">
+  
+      <div class="col-lg-3">
+  
+        <h1 class="my-4">Hayvan Türü</h1>
+        <div class="list-group">
+          <a href="#" class="list-group-item">Köpek</a>
+          <a href="#" class="list-group-item">Kedi</a>
+          <a href="#" class="list-group-item">Diğer</a>
+        </div>
+  
+      </div>
+      <!-- /.col-lg-3 -->
+  
+      <div class="col-lg-9">
+  
+        <div class="card text-center m-5">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item" (click)="removePost()">
+                        <a class="nav-link active sp-danger" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                              </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <img class="card-img-top" [src]="post.imgUrl" alt="">
+            <div class="card-body">
+                <h4 class="card-title">Düzenle</h4>
+                <div class="form-group ">
+                    <label style="float: left;" for="header">Başlık</label>
+                    <input type="text" class="form-control" name="header" id="header" aria-describedby="helpId"
+                        placeholder="" [(ngModel)]="post.header">
+
+                </div>
+                <div class="form-group ">
+                    <label style="float: left;" for="description">Açıklama</label>
+                    <input type="text" class="form-control" name="description" id="description" aria-describedby="helpId"
+                        placeholder="" [(ngModel)]="post.desc">
+
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                      <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon"  [(ngModel)]="post.category">
+                        <option selected>Kategori Seç...</option>
+                        <option value="Dog">Köpek</option>
+                        <option value="Cat">Kedi</option>
+                        <option value="Other">Diğer</option>
+                      </select>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Ekle</button>
+                      </div>
+                    </div>
+                  </div>
+                <div class="form-group ">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Yükle</span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" #userPhoto (change)="onFileSelected($event)" class="custom-file-input"
+                          id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
+                        <label class="custom-file-label" for="inputGroupFile01">Resim Seç</label>
+                      </div>
+                    </div>
+                  </div>
+
+               
+
+                
+                <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Kaydet</button>
+            </div>
+        </div>
+  
+      
+  
+      </div>
+      <!-- /.col-lg-9 -->
+  
+    </div>
+    <!-- /.row -->
+  
+   
+  
+  </div>
+  <!-- /.container -->
+  
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  

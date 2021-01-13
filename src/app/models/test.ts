@@ -1,4 +1,4 @@
-export class Mayit{
-    key: string;
-    adsoyad:string;
+export class Sonuc{
+    islem : boolean;
+    mesaj : string;
 }

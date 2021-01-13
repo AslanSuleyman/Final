@@ -1,7 +1,6 @@
 export class Kayit{
-    key : string;
+    uid : string;
     username :string;
     password: string;
     mail : string;
-    kayTarih:string; 
 }
