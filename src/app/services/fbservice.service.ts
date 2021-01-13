@@ -43,8 +43,10 @@ export class FbserviceService {
   KayitEkle(post : Post) {
     return this.kayitRef.push(post);
   }
-
-  KayıtDuzenle(kayit) {
+  KayitListeleByUID(creator: string) {
+    return this.db.list("/Posts", q => q.orderByChild("creator").equalTo(creator));
+  }
+  KayitDuzenle(kayit) {
     return this.kayitRef.update(kayit.key, kayit);
   }
   KayitSil(key: string) {

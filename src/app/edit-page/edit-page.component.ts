@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { map, finalize } from "rxjs/operators";
 import { Observable } from "rxjs";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../models/post';
 import { FbserviceService } from '../services/fbservice.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit-page',
   templateUrl: './edit-page.component.html',
@@ -20,6 +21,8 @@ export class EditPageComponent implements OnInit {
     private storage: AngularFireStorage,
     private route: ActivatedRoute,
     private fbservice: FbserviceService,
+    private router: Router,
+    private toastController: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +71,17 @@ export class EditPageComponent implements OnInit {
     
     if(confirm("Postu silmek istediğinden emin misin?")){
       this.fbservice.KayitSil(this.key);
+      this.toastController.success('Post Kaldırıldı.')
+      this.router.navigateByUrl('/postlar');
     }
+  }
+
+  editPost(){
+    this.fbservice.KayitDuzenle(this.post).then(res => {
+      this.toastController.success('Post Güncellendi.')
+      this.router.navigateByUrl('/home');
+    }, err => {
+      console.log(JSON.stringify(err));
+    })
   }
 }

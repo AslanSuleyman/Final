@@ -15,6 +15,8 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { PostlarComponent } from './postlar/postlar.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { DateAgoPipe } from './pipes/pipes.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     ProfileComponent,
     EditPageComponent,
-    PostlarComponent
+    PostlarComponent,
+    HeaderComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,

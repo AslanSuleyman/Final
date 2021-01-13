@@ -5,6 +5,8 @@ import { Observable } from "rxjs";
 import { Post } from '../models/post';
 import { Sonuc } from '../models/test';
 import { FbserviceService } from '../services/fbservice.service';
+import { ToastrService } from 'ngx-toastr';
+import { NavigationExtras, Router } from '@angular/router';
 @Component({
   selector: 'app-postlar',
   templateUrl: './postlar.component.html',
@@ -17,10 +19,12 @@ export class PostlarComponent implements OnInit {
   sonuc: Sonuc = new Sonuc();
   userInf;
   uploadProgress$: Observable<number>
-
+  Posts = [];
   constructor(
     private storage:AngularFireStorage,
     private fbservice:FbserviceService,
+    private toastController: ToastrService,
+    private router:Router,
     ) { }
 
   ngOnInit(): void {
@@ -28,6 +32,7 @@ export class PostlarComponent implements OnInit {
     if(user){
       this.userInf = JSON.parse(localStorage.getItem('user'));
     }
+    this.PostListele();
   }
   onFileSelected(event){
     var n = Date.now();
@@ -60,35 +65,50 @@ export class PostlarComponent implements OnInit {
   }
   createPost(){
     if(!(this.Post.header?.length >1)){
-      this.sonuc.islem = false;
-      this.sonuc.mesaj = 'Lütfen bir başlık giriniz.'
+      this.toastController.error('Lütfen bir başlık giriniz.','Hata')
       return
     }else if(!(this.Post.desc?.length >0)){
-      this.sonuc.islem = false;
-      this.sonuc.mesaj = 'Lütfen bir açıklama metni giriniz.'
+      this.toastController.error('Lütfen bir açıklama metni giriniz.','Hata')
       return
     }else if(!(this.Post.category?.length >0)){
-      this.sonuc.islem = false;
-      this.sonuc.mesaj = 'Lütfen bir kategori belirleyiniz.'
+      this.toastController.error('Lütfen bir kategori belirleyiniz.','Hata')
       return
     }else if(!(this.Post.imgUrl?.length >0)){
-      this.sonuc.islem = false;
-      this.sonuc.mesaj = 'Lütfen bir resim yükleyiniz.'
+      this.toastController.error('Lütfen bir resim yükleyiniz.','Hata')
       return
-    }else{
-      this.sonuc.islem = true;
-      this.sonuc.mesaj = 'Postunuz başarılı bir şekilde paylaşıldı.'
     }
+
     var tarih = new Date();
-    this.Post.createDate = tarih.getTime().toString();
+    this.Post.createDate = tarih.getTime();
     this.Post.likeCount = 0;
-    // this.Post.likes ={}
     this.Post.creator = this.userInf.uid;
     this.fbservice.KayitEkle(this.Post).then(res=>{
-      console.log(res);
+    this.toastController.success('Postunuz başarılı bir şekilde paylaşıldı.','Başarılı')
+    this.router.navigateByUrl('/home');
     },err=>{
+      this.toastController.error('Bir hata ile karşılaşıldı lütfen daha sonra tekrar deneyiniz.','Hata')
       console.log(JSON.stringify(err));
     })
     console.log(this.Post);
+  }
+
+  PostListele() {
+    this.fbservice.KayitListeleByUID(this.userInf.uid).snapshotChanges().subscribe(data => {
+      this.Posts = [];
+      data.forEach(satir => {
+        const y = { ...satir.payload.toJSON(), key: satir.key };
+        console.log(y);
+        this.Posts.push(y as Post);
+      });
+    });
+  }
+
+  editPost(post) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        key: post.key
+      }
+    };
+    this.router.navigate(['/edit-page'], navigationExtras);
   }
 }

@@ -14,6 +14,7 @@ import { FbserviceService } from '../services/fbservice.service';
 })
 export class HomeComponent implements OnInit {
   liked = false;
+  accessToEditPost = false;
   Posts: Observable<Post>;
   selectedCard;
   userInf;
@@ -48,31 +49,40 @@ export class HomeComponent implements OnInit {
       }
       post.likes[this.userInf.uid] = true;
     }
-    this.fbservice.KayıtDuzenle(post).then(res => {
-    
+    this.fbservice.KayitDuzenle(post).then(res => {
+
     }, err => {
       console.log(JSON.stringify(err));
     })
   }
 
-  getLikeStatus(post){
-    if(post.likes){
-      if(post.likes[this.specialUID])
-      return true;
-    }else{
+  getLikeStatus(post) {
+    if (post.likes) {
+      if (post.likes[this.specialUID])
+        return true;
+    } else {
       return false;
     }
-   
+
   }
   mouseOnCard(i) {
     this.selectedCard = i;
+    if(this.Posts[i].creator == this.userInf.uid){
+      this.accessToEditPost = true;
+    }else{
+      this.accessToEditPost = false;
+    }
+    
   }
+
   mouseLeaveCard() {
     this.selectedCard = -1;
   }
+
   goDetail() {
     console.log('caard detail');
   }
+
   getList() {
     this.fbservice.KayitListele().snapshotChanges().pipe(
       map(changes =>
@@ -94,10 +104,5 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/edit-page'], navigationExtras);
   }
 
-  logout(){
-    this.fbservice.OturumKapat().then(d=>{
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('/login');
-    })
-  }
+
 }

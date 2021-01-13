@@ -7,5 +7,5 @@ export class Post{
     creator : string;
     likeCount : number;
     likes : {};
-    createDate:string;
+    createDate:number;
 }

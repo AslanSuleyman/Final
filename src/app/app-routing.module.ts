@@ -6,6 +6,7 @@ import  {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-
 import { ProfileComponent } from './profile/profile.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { PostlarComponent } from './postlar/postlar.component';
+import { HeaderComponent } from './header/header.component';
 
 const redirectLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'edit-page', component: EditPageComponent },
   { path: 'postlar', component: PostlarComponent },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: 'header', component: HeaderComponent },
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

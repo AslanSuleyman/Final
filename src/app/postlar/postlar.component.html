@@ -1,89 +1,11 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" [routerLink]="['/home']">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-link active" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-link" [routerLink]="['/postlar']">Postlar</a>
-            <a class="nav-link" [routerLink]="['/profile']">Profile</a>
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </div>
-    </div>
-</nav>
-<div class="container-fluid" style="background:white">
-    
-    <div class="row d-flex justify-content-center">
-        <div class="col-3 ml-5 mt-5">
-
-            <div class="card text-center">
-               
-                <div class="card-body">
-                    <h4 class="card-title">İlan Oluştur</h4>
-                    <div class="form-group ">
-                        <label style="float: left;" for="header">Başlık</label>
-                        <input type="text" class="form-control" name="header" id="header" aria-describedby="helpId"
-                            placeholder="">
-
-                    </div>
-                    <div class="form-group ">
-                        <label style="float:left" for="description">Açıklama</label>
-                        <textarea class="form-control" id="description" rows="4"></textarea>
-
-                    </div>
-                    <div class="form-group ">
-                        <label style="float: left;" for="header">Fotoğraf Seç</label>
-                        <input type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image"
-                            class="btn btn-outline-success" autocomplete="off">
-
-                    </div>
-
-                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Kaydet</button>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div> -->
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <div class="container">
-    <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active">Petsbook</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Anasayfa
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/postlar']" routerLinkActive="router-link-active">Postlar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="router-link-active">Profil</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<app-header></app-header>
 
 <!-- Page Content -->
 <div class="container">
 
   <div class="row">
 
-    <div class="col-lg-3">
+    <div class="col-lg-3 ">
 
       <h1 class="my-4">Kategoriler</h1>
       <div class="list-group">
@@ -95,79 +17,125 @@
     </div>
     <!-- /.col-lg-3 -->
 
-    <div class="col-lg-9">
+    <div class="col-lg-9 mt-4">
 
-      <div class="jumbotron mt-5">
+      <div class="jumbotron mt-5" *ngIf="Posts.length==0">
         <h1 class="display-4">Henüz Bir Post Oluşturmamışsın.Hemen oluştur. </h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-          featured content or information.</p>
+        <p class="lead"></p>
         <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Post Oluştur</a>
+        <p></p>
+        <a class="btn btn-primary btn-lg"   type="button" data-toggle="collapse"
+        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Post Oluştur</a>
       </div>
+
       <div class="row d-flex justify-items-center">
         <div class="col">
-          <div class="card text-center mb-3">
-              <div class="card-body">
-                <h4 class="card-title">Post Oluştur</h4>
-                <div class="form-group ">
-                  <label style="float: left;" for="header">Başlık</label>
-                  <input type="text" class="form-control" name="header" id="header" aria-describedby="helpId" [(ngModel)]="Post.header"
-                    placeholder="">
-
-                </div>
-                <div class="form-group ">
-                  <label style="float:left" for="description">Açıklama</label>
-                  <textarea class="form-control" id="description" rows="4" [(ngModel)]="Post.desc"></textarea>
-
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" [(ngModel)]="Post.category">
-                      <option selected>Kategori Seç...</option>
-                      <option value="Dog">Köpek</option>
-                      <option value="Cat">Kedi</option>
-                      <option value="Other">Diğer</option>
-                    </select>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Ekle</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group ">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroupFileAddon01">Yükle</span>
-                    </div>
-                    <div class="custom-file">
-                      <input type="file" #userPhoto (change)="onFileSelected($event)" class="custom-file-input"
-                        id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
-                      <label class="custom-file-label" for="inputGroupFile01">Resim Seç</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="progress m-3" *ngIf="uploadProgress$ | async as progress">
-                  <div class="progress-bar" [ngClass]="progress ==100? 'bg-success':'bg-info progress-bar-striped'" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
-                </div>
-
-                <button type="button" (click)="createPost()" class="btn btn-primary btn-lg btn-block">Oluştur</button>
+          <div class="accordion mb-4" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Yeni Post oluştur
+                  </button>
+                </h2>
               </div>
-          </div>
- 
-        
-          <div [ngClass]="sonuc.islem? 'alert alert-success':'alert alert-danger'" class="alert-dismissible fade show mt-1" *ngIf="sonuc.mesaj?.length>0" role="alert">
-            {{sonuc.mesaj}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="sonucClear()" >
-              <span aria-hidden="true">&times;</span>
-            </button>
+
+              <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <div class="card text-center mb-3">
+                    <div class="card-body">
+                      <h4 class="card-title">Post Oluştur</h4>
+                      <div class="form-group ">
+                        <label style="float: left;" for="header">Başlık</label>
+                        <input type="text" class="form-control" name="header" id="header" aria-describedby="helpId"
+                          [(ngModel)]="Post.header" placeholder="">
+
+                      </div>
+                      <div class="form-group ">
+                        <label style="float:left" for="description">Açıklama</label>
+                        <textarea class="form-control" id="description" rows="4" [(ngModel)]="Post.desc"></textarea>
+
+                      </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <select class="custom-select" id="inputGroupSelect04"
+                            aria-label="Example select with button addon" [(ngModel)]="Post.category">
+                            <option selected>Kategori Seç...</option>
+                            <option value="Dog">Köpek</option>
+                            <option value="Cat">Kedi</option>
+                            <option value="Other">Diğer</option>
+                          </select>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Ekle</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group ">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Yükle</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" #userPhoto (change)="onFileSelected($event)" class="custom-file-input"
+                              id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Resim Seç</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="progress m-3" *ngIf="uploadProgress$ | async as progress">
+                        <div class="progress-bar"
+                          [ngClass]="progress ==100? 'bg-success':'bg-info progress-bar-striped'" role="progressbar"
+                          [ngStyle]="{ 'width': progress + '%' }"></div>
+                      </div>
+
+                      <button type="button" (click)="createPost()"
+                        class="btn btn-primary btn-lg btn-block">Oluştur</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-
       </div>
-      <!-- /.row -->
 
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4 mt-5" *ngFor="let post of Posts; let i=index">
+     
+          <div class="card border-info card-hover h-100">
+            <!-- <div style="width: 40px;background-color: red;position: absolute;"> -->
+             
+    
+              <div class="right-icons" (click)="editPost(post)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                  class="bi bi-gear-fill text-danger" viewBox="0 0 16 16">
+                  <path
+                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                </svg>
+              </div>
+            <!-- </div> -->
+            
+            <img class="card-img-top" [src]="post.imgUrl" alt="">
+            <div class="card-body text-info">
+    
+              <h5>{{post.header}}</h5>
+              <p class="card-text">{{post.desc}}</p>
+              <button disabled="true" class="btn btn-outline-primary"><i class="fa fa-star"></i> {{post.likeCount}}</button>
+            </div>
+            <div class="card-footer">
+              <button disabled="true" class="btn btn-outline-primary btn-block "><i class="fa fa-calendar"></i>
+                {{post.createDate | dateAgo}}</button>
+    
+            </div>
+          </div>
+          
+        </div>  
+      </div>
     </div>
     <!-- /.col-lg-9 -->
+  
 
   </div>
   <!-- /.row -->
@@ -176,7 +144,7 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-warning">
   <div class="container">
     <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
   </div>
