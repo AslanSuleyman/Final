@@ -5,6 +5,9 @@ export class Post{
     category : string;
     imgUrl : string;
     creator : string;
+    creatorName: string;
+    creatorPhoto:string;
+    from : string;
     likeCount : number;
     likes : {};
     createDate:number;

@@ -3,4 +3,7 @@ export class Kayit{
     username :string;
     password: string;
     mail : string;
+    city:string;
+    photo:string;
+    key:string;
 }

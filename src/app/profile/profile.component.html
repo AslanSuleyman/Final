@@ -1,43 +1,178 @@
-
 <app-header></app-header>
 
 <!-- Page Content -->
 <div class="container">
 
-  <div class="row">
+    <div class="row">
 
-    <div class="col-lg-3 ">
+        <div class="col-lg-3 ">
 
-      <h1 class="my-4">Kategoriler</h1>
-      <div class="list-group">
-        <a href="#" class="list-group-item">Category 1</a>
-        <a href="#" class="list-group-item">Category 2</a>
-        <a href="#" class="list-group-item">Category 3</a>
-      </div>
+            <h1 class="my-4">Kategoriler</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Category 1</a>
+                <a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">Category 3</a>
+            </div>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-title mb-4">
+                                <div class="d-flex justify-content-start">
+                                    <div class="image-container">
+                                        <img [src]="userInf.photoURL" id="imgProfile"
+                                            style="width: 150px; height: 150px" class="img-thumbnail" />
+                                        <div class="middle">
+                                            <input type="button" class="btn btn-secondary" id="btnChangePicture"
+                                                (click)="openFile(fileInput)" value="Change" />
+                                            <input type="file" #fileInput style="display: none;"
+                                                (change)="onFileChanged($event)" id="profilePicture" name="file" />
+                                        </div>
+                                    </div>
+                                    <div class="userData ml-3">
+                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a
+                                                href="javascript:void(0);">{{User?.username}}</a></h2>
+                                        <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Gönderi Sayısı</h6>
+                                        <h6 class="d-block"><a href="javascript:void(0)">300</a> Beğeni</h6>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <input type="button" class="btn btn-primary d-none" id="btnDiscard"
+                                            value="Discard Changes" />
+                                    </div>
+                                </div>
+                                <div class="progress mt-3" *ngIf="uploadProgress$ | async as progress">
+                                    <div class="progress-bar"
+                                        [ngClass]="progress ==100? 'bg-success':'bg-info progress-bar-striped'"
+                                        role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="basicInfo-tab" data-toggle="tab"
+                                                href="#basicInfo" role="tab" aria-controls="basicInfo"
+                                                aria-selected="true">Hakkında</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab"
+                                                href="#connectedServices" role="tab" aria-controls="connectedServices"
+                                                aria-selected="false">Beğenilen Gönderiler</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content ml-1" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="basicInfo" role="tabpanel"
+                                            aria-labelledby="basicInfo-tab">
+
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Ad Soyad</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{User?.username}}
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Yaşadığın Şehir</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{User?.city}}
+                                                </div>
+                                            </div>
+                                            <hr />
+
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Email</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    {{User?.mail}}
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                        </div>
+                                        <div class="tab-pane fade" id="connectedServices" role="tabpanel"
+                                            aria-labelledby="ConnectedServices-tab">
+                                            <h3>Beğenilen gönderiler</h3>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 mb-4 mt-5"
+                                                    *ngFor="let post of Posts; let i=index">
+
+                                                    <div class="card border-info card-hover h-100">
+
+                                                        <!-- <div
+                                                    style="width: 100%;background-color: black;position: absolute;height: 50px;opacity: 0.5;">
+
+                                                </div> -->
+
+                                                        <!-- <div class="right-icons" (click)="editPost(post)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-gear-fill text-danger"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                                    </svg>
+                                                </div> -->
+
+
+                                                        <img class="card-img-top" [src]="post.imgUrl" alt="">
+                                                        <div class="card-body text-info">
+
+                                                            <h5>{{post.header}}</h5>
+                                                            <!-- <p class="card-text">{{post.desc}}</p> -->
+                                                        </div>
+                                                        <div class="card-footer">
+
+                                                            <button disabled="true"
+                                                                class="btn btn-outline-primary  btn-font">
+                                                                {{post.createDate | dateAgo}}</button>
+                                                            <button disabled="true"
+                                                                class="btn btn-outline-primary  btn-font  ml-2">{{post.likeCount}}
+                                                                <i id="star-icon" class="fa fa-star"></i> </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--/ row -->
+
+
+
+
+
+        </div>
+        <!-- /.col-lg-9 -->
 
     </div>
-    <!-- /.col-lg-3 -->
-
-    <div class="col-lg-9">
-
-      
- 
-        
-    
-
-    </div>
-    <!-- /.col-lg-9 -->
-
-  </div>
-  <!-- /.row -->
+    <!-- /.row -->
 
 </div>
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-warning">
-  <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-  </div>
-  <!-- /.container -->
-</footer>

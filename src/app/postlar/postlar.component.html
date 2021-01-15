@@ -106,7 +106,9 @@
      
           <div class="card border-info card-hover h-100">
             <!-- <div style="width: 40px;background-color: red;position: absolute;"> -->
-             
+              <div style="width: 100%;background-color: black;position: absolute;height: 50px;opacity: 0.5;">
+              
+              </div>
     
               <div class="right-icons" (click)="editPost(post)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -122,12 +124,13 @@
     
               <h5>{{post.header}}</h5>
               <p class="card-text">{{post.desc}}</p>
-              <button disabled="true" class="btn btn-outline-primary"><i class="fa fa-star"></i> {{post.likeCount}}</button>
+              <!-- <button disabled="true" class="btn btn-outline-primary"><i class="fa fa-star"></i> {{post.likeCount}}</button> -->
             </div>
             <div class="card-footer">
-              <button disabled="true" class="btn btn-outline-primary btn-block "><i class="fa fa-calendar"></i>
-                {{post.createDate | dateAgo}}</button>
-    
+      
+                <button disabled="true" class="btn btn-outline-primary  btn-font">
+                  {{post.createDate | dateAgo}}</button>
+                  <button disabled="true" class="btn btn-outline-primary  btn-font  ml-2">{{post.likeCount}} <i id="star-icon" class="fa fa-star"></i> </button>
             </div>
           </div>
           
@@ -144,9 +147,3 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-warning">
-  <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-  </div>
-  <!-- /.container -->
-</footer>

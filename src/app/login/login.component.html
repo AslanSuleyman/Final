@@ -85,7 +85,11 @@
                 <small id="emailHelp" class="form-text text-muted">Email adresiniz başka kimse ile
                   paylaşılmayacaktır.</small>
               </div>
-           
+              <div class="form-group text-dark">
+                <label for="signup-city">Şehir</label>
+                <input type="text" class="form-control"  id="signup-city"
+                  aria-describedby="cityHelp" name="city" [(ngModel)]="User.city">
+              </div>  
               <div class="form-group text-dark">
                 <label for="signup-password">Şifre</label>
                 <input type="password" class="form-control"  id="signup-password"

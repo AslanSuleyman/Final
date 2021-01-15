@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fbservice: FbserviceService,
-    private toastController:ToastrService,
+    private toastController: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       }
 
     }, err => {
-      this.toastController.error('Bilgileriniz eksik veya hatalı, lütfen doğru kullanıcı ile giriş yaptığınızdan emin olun.','Giriş Yapılamadı.')
+      this.toastController.error('Bilgileriniz eksik veya hatalı, lütfen doğru kullanıcı ile giriş yaptığınızdan emin olun.', 'Giriş Yapılamadı.')
       console.log(JSON.stringify(err));
     })
   }
@@ -56,20 +56,23 @@ export class LoginComponent implements OnInit {
     this.fbservice.registerUser(this.User).then(res => {
       console.log(res);
       if (res.user) {
+        res.user.updateProfile({
+          displayName: this.User.username
+        })
         localStorage.setItem('user', JSON.stringify(res.user));
         this.User.uid = res.user.uid;
         this.fbservice.createUser(this.User);
         $('#KayitModal').modal('hide');
-        this.toastController.success('Lütfen giriş yapınız','Kayıt Başarılı')
+        this.toastController.success('Lütfen giriş yapınız', 'Kayıt Başarılı')
       }
     }, err => {
-      this.toastController.error('Kayıt olma işleminiz başarısız sonuçlanmıştır.','Bir Hata Oluştu')
+      this.toastController.error('Kayıt olma işleminiz başarısız sonuçlanmıştır.', 'Bir Hata Oluştu')
       $('#KayitModal').modal('hide');
       console.log(JSON.stringify(err));
     })
   }
 
-  sonucClear(){
+  sonucClear() {
     this.sonuc.mesaj = '';
   }
 }

@@ -67,12 +67,12 @@ export class HomeComponent implements OnInit {
   }
   mouseOnCard(i) {
     this.selectedCard = i;
-    if(this.Posts[i].creator == this.userInf.uid){
+    if (this.Posts[i].creator == this.userInf.uid) {
       this.accessToEditPost = true;
-    }else{
+    } else {
       this.accessToEditPost = false;
     }
-    
+
   }
 
   mouseLeaveCard() {
@@ -92,7 +92,23 @@ export class HomeComponent implements OnInit {
       )
     ).subscribe(data => {
       this.Posts = data;
-      console.log(this.Posts);
+      
+      this.Posts.forEach(element=>{
+        
+        this.fbservice.UserListeleByUID(element.creator).snapshotChanges().subscribe(data => {
+          data.forEach(satir => {
+            const y = { ...satir.payload.toJSON() };
+            if(y['city'])
+              element.from = y['city'];
+          
+            element.creatorName = y['username'];
+            this.fbservice.getPhotoByName(y['photo']).subscribe(url=>{
+              element.creatorPhoto = url;
+            })
+          });
+        })
+      })
+      
     })
   }
   editPost(post) {
@@ -104,5 +120,17 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/edit-page'], navigationExtras);
   }
 
+
+  categorizedBy(item){
+    // // console.log(item);
+    // this.fbservice.KayitListeleByCategory(item).snapshotChanges().subscribe(data => {
+    //   data.forEach(satir => {
+    //     const y = { ...satir.payload.toJSON(), key: satir.key };
+    //     console.log(y);
+    //     this.Posts.push(y as Post);
+    //   });
+    // });
+
+  }
 
 }
