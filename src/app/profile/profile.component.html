@@ -7,7 +7,7 @@
 
         <div class="col-lg-3 ">
 
-            <h1 class="my-4">Kategoriler</h1>
+            <h1 class="my-4">Profil</h1>
             <div class="list-group">
                 <a href="#" class="list-group-item">Category 1</a>
                 <a href="#" class="list-group-item">Category 2</a>
@@ -40,8 +40,8 @@
                                     <div class="userData ml-3">
                                         <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a
                                                 href="javascript:void(0);">{{User?.username}}</a></h2>
-                                        <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Gönderi Sayısı</h6>
-                                        <h6 class="d-block"><a href="javascript:void(0)">300</a> Beğeni</h6>
+                                        <h6 class="d-block"><a [routerLink]="['/postlar']"  >{{postCount}}</a> Gönderi Sayısı</h6>
+                                        <h6 class="d-block"><a href="javascript:void(0)">{{Posts.length}}</a> Beğeni</h6>
                                     </div>
                                     <div class="ml-auto">
                                         <input type="button" class="btn btn-primary d-none" id="btnDiscard"

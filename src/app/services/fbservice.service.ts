@@ -9,9 +9,11 @@ import { Post } from '../models/post';
 })
 export class FbserviceService {
   private dbKayit = '/Posts';
-  private dbUsers = '/Kullanıcılar'
+  private dbUsers = '/Kullanıcılar';
+  private dbComments = '/Yorumlar';
   kayitRef = null;
   kayitUsers;
+  kayitComments;
   constructor(
     public db: AngularFireDatabase,
     public fireAuth: AngularFireAuth,
@@ -19,6 +21,7 @@ export class FbserviceService {
   ) {
     this.kayitRef = db.list(this.dbKayit);
     this.kayitUsers = db.list(this.dbUsers);
+    this.kayitComments = db.list(this.dbComments);
   }
 
   OturumAc(email, pass) {
@@ -30,9 +33,7 @@ export class FbserviceService {
   KayitListele() {
     return this.kayitRef;
   }
-  PostListele() {
 
-  }
   async updateProfile(profile) {
 
     return (await this.fireAuth.currentUser).updateProfile(profile)
@@ -75,5 +76,17 @@ export class FbserviceService {
   }
   getLikedPosts(uid){
     return this.db.list("/Posts", q => q.orderByChild("likes").equalTo(uid));
+  }
+  addComment(comment){
+    return this.kayitComments.push(comment);
+  }
+  editComment(comment){
+    return this.kayitComments.update(comment.key,comment);
+  }
+  deleteComment(key){
+    return this.kayitComments.remove(key);
+  }
+  getComments(key){
+    return this.db.list("/Yorumlar", q => q.orderByChild("postkey").equalTo(key));
   }
 }

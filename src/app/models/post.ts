@@ -9,6 +9,8 @@ export class Post{
     creatorPhoto:string;
     from : string;
     likeCount : number;
+    commentCount : number;
     likes : {};
+    comments :[];
     createDate:number;
 }

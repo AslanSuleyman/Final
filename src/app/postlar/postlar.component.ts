@@ -97,7 +97,6 @@ export class PostlarComponent implements OnInit {
       this.Posts = [];
       data.forEach(satir => {
         const y = { ...satir.payload.toJSON(), key: satir.key };
-        console.log(y);
         this.Posts.push(y as Post);
       });
     });

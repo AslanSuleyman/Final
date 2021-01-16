@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   Posts = [];
   downloadURL: Observable<string>;
   uploadProgress$: Observable<number>
+  postCount = 0;
   constructor(
     private fbservice: FbserviceService,
     private storage: AngularFireStorage,
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
     if (user) {
       this.userInf = JSON.parse(localStorage.getItem('user'));
       this.getUser();
+      this.getPostsCount()
     }
 
 
@@ -52,11 +54,14 @@ export class ProfileComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               console.log(url);
+              console.log(this.User.username);
               const profile = {
                 photoURL: url,
+                displayName: this.User.username
               }
               this.fbservice.updateProfile(profile);
               this.userInf.photoURL = url;
+              this.userInf.displayName = this.User.username;
               localStorage.setItem('user', JSON.stringify(this.userInf))
               this.User.photo = n.toString();
               this.fbservice.updateUser(this.User);
@@ -103,5 +108,16 @@ export class ProfileComponent implements OnInit {
       
     })
   
+  }
+
+  getPostsCount(){
+    this.fbservice.KayitListeleByUID(this.userInf.uid).snapshotChanges().subscribe(data => {
+      
+      data.forEach(satir => {
+        const y = { ...satir.payload.toJSON(), key: satir.key };
+        this.postCount++;
+        
+      });
+    });
   }
 }
