@@ -332,7 +332,9 @@
   line-height: 30px;
   display: block;
 }
-
+.search-share:focus{
+  outline:0;
+}
 input:focus {
   outline: 0;
 }

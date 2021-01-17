@@ -86,14 +86,13 @@ export class HomeComponent implements OnInit {
 
   mouseLeaveCard() {
     this.selectedCard = -1;
-    console.log(this.comment_input['nativeElement'].value);
   }
 
   goDetail() {
     console.log('caard detail');
   }
 
-  getList() {
+  getList() {//eğer uygulama ilk çalıştırıldığında cannot get hatası alıyorsanız bu fonksiyonun içini kapatıp çalıştırın uygulama webde açıldıktan sonra bu fonksiyonu açabilirsiniz.
     this.fbservice.KayitListele().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -132,10 +131,10 @@ export class HomeComponent implements OnInit {
   editcommentmode = false;
   addComment(data, post) {
    
-    console.log(data);
-    if (data && this.userInf.uid) {
+    console.log(data.value);
+    if (data.value && this.userInf.uid) {
       if (this.comment.key) {
-        this.comment.comment = data;
+        this.comment.comment = data.value;
         console.log('yorum editle')
         this.fbservice.editComment(this.comment).then(res=>{
           this.toastController.success('Yorum düzenlendi.')
@@ -145,10 +144,11 @@ export class HomeComponent implements OnInit {
         return;
       }
       console.log('Yorum paylaş')
-      this.comment.comment = data;
+      this.comment.comment = data.value;
       this.comment.postkey = post.key;
       this.comment.userPhoto = this.userInf.photoURL;
       this.comment.username = this.userInf.displayName;
+      console.log(this.comment);
       this.fbservice.addComment(this.comment);
       if(post.commentCount){
         post.commentCount++;
@@ -189,10 +189,12 @@ export class HomeComponent implements OnInit {
     this.editcommentmode = true;
     this.selectedComment = i
     Object.assign(this.comment,comment);
+    this.comment_input['nativeElement'].value = this.comment.comment;
   }
   leaveEditMode(){
     this.editcommentmode = false;
     this.comment = new CommentPost();
+    this.comment_input['nativeElement'].value = '';
   }
   deleteComment(comment,post){
    

@@ -133,9 +133,9 @@
                     [src]="userInf.photoURL" alt="..."></a>
               </span>
               <div class="search">
-                <input [(ngModel)]="comment.comment" #commentInp placeholder="Yorum yaz" type="text">
+                <input (ngModel)="comment.comment" #commentInp placeholder="Yorum yaz" type="text">
               
-                <button class="search-share" (click)="addComment(comment.comment,post)"><i class="fa fa-share"></i></button>
+                <button class="search-share" (click)="addComment(commentInp,post)"><i class="fa fa-share"></i></button>
               </div>
              
               <!--/. Search -->
