@@ -209,16 +209,6 @@ export class HomeComponent implements OnInit {
     }
     
   }
-  categorizedBy(item) {
-    // // console.log(item);
-    // this.fbservice.KayitListeleByCategory(item).snapshotChanges().subscribe(data => {
-    //   data.forEach(satir => {
-    //     const y = { ...satir.payload.toJSON(), key: satir.key };
-    //     console.log(y);
-    //     this.Posts.push(y as Post);
-    //   });
-    // });
 
-  }
 
 }
